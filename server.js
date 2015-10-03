@@ -22,12 +22,10 @@ function getRandomWord(object) {
 }
 
 app.get("/", function (req, res) {
-  console.log(req);
   res.sendFile('index.html');
 });
 
 app.get('/adjective', function (req, res) {
-  console.log(req);
   res.json(getRandomWord(adjective));
 });
 
