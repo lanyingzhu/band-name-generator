@@ -6,16 +6,16 @@ app.listen(port, function () {
   console.log('server started on port ' + port);
 });
 
-function Adjective() {
-  this.sleepy = true;
-  this.happy = true;
-  this.sad = true;
-  this.nice = true;
-}
+var Adjective = require('./app/adjective.js');
+var adjective = new Adjective.Adjective();
 
-var adjective = new Adjective();
+var Verb = require('./app/verb.js');
+var verb = new Verb.Verb();
 
-function Verbs() {
+var Noun = require('./app/noun.js');
+var noun = new Noun.Noun();
+
+/*function Verbs() {
   this.smile = true;
   this.cry = true;
   this.jump = true;
@@ -31,29 +31,58 @@ function Nouns() {
   this.grape = true;
 }
 
-var noun = new Nouns();
+var noun = new Nouns();*/
 
-function getRandomWord(object) {
+/*function getRandomWord(object) {
   var propArray = Object.keys(object);
   var randomProp = propArray[Math.floor(Math.random() * propArray.length)];
   return {word: randomProp};
-}
+}*/
+
+var getRandomWord = require('./app/getRandomWord.js');
 
 app.get("/", function (req, res) {
   res.sendFile('index.html');
 });
 
 app.get('/adjective', function (req, res) {
-  res.json(getRandomWord(adjective));
+  res.json(getRandomWord.getRandomWord(adjective));
 });
 
 app.get('/verb', function (req, res) {
-  res.json(getRandomWord(verb));
+  res.json(getRandomWord.getRandomWord(verb));
 });
 app.get('/noun', function (req, res) {
-  res.json(getRandomWord(noun));
+  res.json(getRandomWord.getRandomWord(noun));
 });
 
+var PostWord = require('./app/PostWord.js');
+
+app.post('/adjective', function (req, res) {
+  var body = "";
+  req.on('data', function (data) {
+    body += data;
+    res.json(PostWord.postWord(adjective, body));
+  });
+});
+
+app.post('/verbs',function (req, res) {
+  var body = "";
+  req.on('data', function (data) {
+    body += data;
+    res.json(PostWord.postWord(verb, body));
+  });
+});
+
+app.post('/nouns',function (req, res) {
+  var body = "";
+  req.on('data', function (data) {
+    body += data;
+    res.json(PostWord.postWord(noun, body));
+  });
+});
+
+/*
 app.post('/adjective', function (req, res) {
   var body = "";
   req.on('data', function (data) {
@@ -63,3 +92,24 @@ app.post('/adjective', function (req, res) {
     res.json({result: 'Added the word "' + body + '" into adjective object.'});
   });
 });
+
+app.post('/verb', function (req, res) {
+  var body = "";
+  req.on('data', function (data) {
+    body += data;
+    console.log(body);
+    verb[body] = true;
+    res.json({result: 'Added the word "' + body + '" into verb object.'});
+  });
+});
+
+app.post('/noun', function (req, res) {
+  var body = "";
+  req.on('data', function (data) {
+    body += data;
+    console.log(body);
+    noun[body] = true;
+    res.json({result: 'Added the word "' + body + '" into noun object.'});
+  });
+});
+*/
