@@ -1,3 +1,5 @@
+'use strict';
+
 function Verbs() {
   this.smile = true;
   this.cry = true;

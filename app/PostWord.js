@@ -1,3 +1,5 @@
+'use strict';
+
 function postWord(object, word) {
   console.log(word);
   object[word] = true;

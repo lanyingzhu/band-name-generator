@@ -1,3 +1,5 @@
+'use strict';
+
 function Adjective() {
   this.sleepy = true;
   this.happy = true;

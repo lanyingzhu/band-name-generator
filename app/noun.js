@@ -1,3 +1,5 @@
+'use strict';
+
 function Noun() {
   this.apple = true;
   this.orange = true;

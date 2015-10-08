@@ -20,7 +20,9 @@ module.exports = function(grunt) {
         node: true,
         globals: {
           $: true
-        }
+        },
+        browser: true,
+        devel: true
       }
     },
     jscs: {
@@ -29,8 +31,8 @@ module.exports = function(grunt) {
         preset: "airbnb",
         requireDotNotation: null,
         disallowMultipleVarDecl: null,
-        requireMultipleVarDecl: null
-      }
+        requireMultipleVarDecl: null,
+      },
     }
   });
 
