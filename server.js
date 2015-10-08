@@ -15,44 +15,26 @@ var verb = new Verb.Verb();
 var Noun = require('./app/noun.js');
 var noun = new Noun.Noun();
 
-/*function Verbs() {
-  this.smile = true;
-  this.cry = true;
-  this.jump = true;
-  this.dance = true;
-}
-
-var verb = new Verbs();
-
-function Nouns() {
-  this.apple = true;
-  this.orange = true;
-  this.peach = true;
-  this.grape = true;
-}
-
-var noun = new Nouns();*/
-
-/*function getRandomWord(object) {
-  var propArray = Object.keys(object);
-  var randomProp = propArray[Math.floor(Math.random() * propArray.length)];
-  return {word: randomProp};
-}*/
-
 var getRandomWord = require('./app/getRandomWord.js');
 
+/*jshint validthis:true */
 app.get("/", function (req, res) {
+  console.log(req.method);
   res.sendFile('index.html');
 });
 
 app.get('/adjective', function (req, res) {
+  console.log(req.method);
   res.json(getRandomWord.getRandomWord(adjective));
 });
 
 app.get('/verb', function (req, res) {
+  console.log(req.method);
   res.json(getRandomWord.getRandomWord(verb));
 });
+
 app.get('/noun', function (req, res) {
+  console.log(req.method);
   res.json(getRandomWord.getRandomWord(noun));
 });
 
@@ -66,7 +48,7 @@ app.post('/adjective', function (req, res) {
   });
 });
 
-app.post('/verbs',function (req, res) {
+app.post('/verbs', function (req, res) {
   var body = "";
   req.on('data', function (data) {
     body += data;
@@ -74,7 +56,7 @@ app.post('/verbs',function (req, res) {
   });
 });
 
-app.post('/nouns',function (req, res) {
+app.post('/nouns', function (req, res) {
   var body = "";
   req.on('data', function (data) {
     body += data;
@@ -82,34 +64,3 @@ app.post('/nouns',function (req, res) {
   });
 });
 
-/*
-app.post('/adjective', function (req, res) {
-  var body = "";
-  req.on('data', function (data) {
-    body += data;
-    console.log(body);
-    adjective[body] = true;
-    res.json({result: 'Added the word "' + body + '" into adjective object.'});
-  });
-});
-
-app.post('/verb', function (req, res) {
-  var body = "";
-  req.on('data', function (data) {
-    body += data;
-    console.log(body);
-    verb[body] = true;
-    res.json({result: 'Added the word "' + body + '" into verb object.'});
-  });
-});
-
-app.post('/noun', function (req, res) {
-  var body = "";
-  req.on('data', function (data) {
-    body += data;
-    console.log(body);
-    noun[body] = true;
-    res.json({result: 'Added the word "' + body + '" into noun object.'});
-  });
-});
-*/
