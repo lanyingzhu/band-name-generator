@@ -1,34 +1,34 @@
 'use strict';
 
-var url = window.location.href;
-
 $(function() {
 
   $('#name1').click(function() {
-    console.log(url);
-    $.get(url + 'adjective', function(response) {
+    $.get('adjective', function(response) {
       $('#adjective').text(response.word);
+      $('#adjective').css('color', 'red');
+      $('#favAdj').text(response.favadj);
+      $('#favAdj').css('color', 'red');
     });
   });
-});
-
-$(function() {
 
   $('#name2').click(function() {
-    $.get(url + 'verb', function(response) {
-
+    $.get('verb', function(response) {
       $('#verb').text(response.word);
+      $('#verb').css('color', 'blue');
+      $('#favVerb').text(response.favverb);
+      $('#favVerb').css('color', 'blue');
     });
   });
-});
-
-$(function() {
 
   $('#name3').click(function() {
-    $.get(url + 'noun', function(response) {
+    $.get('noun', function(response) {
       $('#noun').text(response.word);
+      $('#noun').css('color', 'green');
+      $('#favNoun').text(response.favnoun);
+      $('#favNoun').css('color', 'green');
     });
   });
+
 });
 
 $(function() {
@@ -44,18 +44,21 @@ $(function() {
 
     var wordKey = wordArray[0];
     if (wordKey === 'adj') {
-      $.post(url + 'adjective', wordArray[1], function(response) {
+      $.post('adjective', wordArray[1], function(response) {
         $('#word').text(response.result);
+        $('#word').css('color', 'pink');
         $('input:text').val('');
       });
     } else if (wordKey === 'verb') {
-      $.post(url + 'verbs', wordArray[1], function(response) {
+      $.post('verb', wordArray[1], function(response) {
         $('#word').text(response.result);
+        $('#word').css('color', 'pink');
         $('input:text').val('');
       });
     } else if (wordKey === 'noun') {
-      $.post(url + 'nouns', wordArray[1], function(response) {
+      $.post('noun', wordArray[1], function(response) {
         $('#word').text(response.result);
+        $('#word').css('color', 'pink');
         $('input:text').val('');
       });
     }
